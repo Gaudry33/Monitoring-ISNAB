@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/PreviewMeteo.gif" alt="Schéma de l'infrastructure" width="700">
+  <img src="Assets/Isnab.gif" width="700">
 </p>
 
 ## Supervision Centralisée de l'Infrastructure Réseau
