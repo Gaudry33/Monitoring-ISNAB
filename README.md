@@ -10,3 +10,11 @@ Pour garantir la continuité de service et la sécurité du réseau, il est néc
 * Monitorer l'état de santé du SRV1 (CPU, Disques, Sauvegardes).
 * Suivre les données de l'autonomie et la charge de l'onduleur.
 * Envoyer des alertes automatiques par Email en cas d'anomalie.
+
+## Composants Clés 
+
+* Microcontrôleur ESP32 & Capteur DHT22
+* Serveur de Supervision Zabbix
+* Serveur Web Apache 
+* Base de données MariaDB 
+* Onduleur, SRV1, PCRD
