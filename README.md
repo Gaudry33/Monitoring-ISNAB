@@ -26,5 +26,4 @@ Pour garantir la continuité de service et la sécurité du réseau, il est néc
 * Gestion de base de données : MariaDB .
 * Serveur Web : Apache                                                                                                                                             
 * Environnements de développement : Visual Studio Code & Arduino IDE.                                                                                                                                                                                       
-Systèmes d'exploitation : Distribution Debian 12 (Serveur) et Windows 11 (Poste de développement)
                                                                   
