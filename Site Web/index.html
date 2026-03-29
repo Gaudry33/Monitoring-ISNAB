@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISNAB MONITORING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <header class="top-bar">
+        <div class="logo-titre">
+            <!-- Logo Absyde -->
+            <img src="logo_absyde.png" alt="Logo Entreprise" class="logo-img">
+            <h2>ISNAB MONITORING</h2>
+        </div>
+        <span class="tempsreel" id="tempsreel">--:--:--</span>
+    </header>
+
+
+    <main class="grid-dashboard">
+
+        <!-- Bloc Graphique CPU (SRV1) -->
+        <div class="panel">
+            <div class="panel-titre">CPU (SRV1)</div>
+            <div class="panel-graph"><canvas id="graphiqueSrvCpu"></canvas></div>
+        </div>
+
+        <!-- Bloc Graphique Disque SSD (SRV1) -->
+        <div class="panel">
+            <div class="panel-titre">DD SSD (SRV1)</div>
+            <div class="panel-graph"><canvas id="graphiqueSrvSsd"></canvas></div>
+        </div>
+
+        <!-- Bloc Texte des Données CPU & SSD (SRV1) -->
+        <div class="panel">
+            <div class="panel-titre">Données CPU & SSD (SRV1)</div>
+            <ul class="liste-stats">
+                <li><span class="label">Utilisation du CPU</span> <span class="val" id="valSrvCpu">--%</span></li>
+                <li><span class="label">Santé du CPU</span> <span class="val" id="valSrvCpuSante">--%</span></li>
+                <li><span class="label">Utilisation du Disque</span> <span class="val" id="valSrvDisque">--%</span></li>
+                <li><span class="label">Stockage SSD Total</span> <span class="val" id="valSrvDisqueTotal">... To</span>
+                </li>
+
+                <!-- Ajout d'une ligne de séparation -->
+
+                <li class="separateur"></li>
+                <li><span class="label">Synchronisation Sauvegarde</span> <span class="val"
+                        id="logSyncTime">--:--</span></li>
+                <li><span class="label">Statut Sauvegarde</span> <span id="logSyncStatus" class="val">--</span></li>
+            </ul>
+        </div>
+
+        <!-- Bloc Graphique Onduleur - Batterie et Charge de Sortie -->
+        <div class="panel">
+            <div class="panel-titre">Onduleur (ISNAB)</div>
+            <div class="panel-graph"><canvas id="graphiqueOnduleurBatterie"></canvas></div>
+        </div>
+
+        <!-- Bloc Graphique Onduleur - Autonomie -->
+        <div class="panel">
+            <div class="panel-titre">Onduleur (ISNAB)</div>
+            <div class="panel-graph"><canvas id="graphiqueOnduleurAutonomie"></canvas></div>
+        </div>
+
+        <!-- Bloc Texte des Données Onduleur & Environnementales (ISNAB) -->
+        <div class="panel">
+            <div class="panel-titre">Données Onduleur & Environnementales (ISNAB)</div>
+            <ul class="liste-stats">
+                <li><span class="label">Charge de Batterie</span> <span class="val" id="valOnduleurBatterie">--%</span>
+                </li>
+                <li><span class="label">Charge de sortie</span> <span class="val" id="valOnduleurSortie">--%</span></li>
+                <li><span class="label">Autonomie de batterie</span> <span class="val" id="valOnduleurAutonomie">--
+                        min</span></li>
+
+                <!-- Ajout d'une ligne de séparation -->
+
+                <li class="separateur"></li>
+                <li><span class="label">Température</span> <span class="val">22.5°C</span></li>
+                <li><span class="label">Humidité</span> <span class="val">45.0%</span></li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- Javascript -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>
