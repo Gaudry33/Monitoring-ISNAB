@@ -21,10 +21,10 @@ Pour garantir la continuité de service et la sécurité du réseau, il est néc
 
 ## Technologies Utilisées
 
-* Langages de programmation : C++ (systèmes embarqués), SQL (gestion de données), HTML & CSS (personnalisation web).
-* Supervision & Visualisation : Zabbix & Zabbix Frontend pour le monitoring et la création de dashboards dynamiques.
-* Gestion de base de données : MariaDB pour l'historisation des métriques.
-* Serveur Web : Apache (Hébergement de l'interface de supervision).
+* Langages de programmation : C++ , SQL , HTML & CSS & JSS
+* Supervision & Visualisation : Zabbix & Site Web
+* Gestion de base de données : MariaDB .
+* Serveur Web : Apache
 * Environnements de développement : Visual Studio Code & Arduino IDE.
 
 Systèmes d'exploitation : Distribution Debian 12 (Serveur) et Windows 11 (Poste de développement)
