@@ -29,5 +29,5 @@ Pour garantir la continuité de service et la sécurité du réseau, il est néc
 * Supervision & Visualisation : Zabbix & Site Web
 * Gestion de base de données : MariaDB .
 * Serveur Web : Apache                                                                                                                                             
-* Environnements de développement : Visual Studio Code & Arduino IDE.                                                                                                                                                                                       
+* Environnements de développement : Visual Studio Code                                                                                                                                                                            
                                                                   

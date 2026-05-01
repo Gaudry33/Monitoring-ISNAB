@@ -1,8 +1,8 @@
 const API = "a0a6a576d587407464f8dd1a481992540b8007c59189b6f194c988bedbdda17e";
 const MAX_POINTS = 61;
-const CLES = ["srv1.cpu.percent", "srv1.cpu.status", "srv1.disk.used", "srv1.disk.total", "ups.battery.charge", "ups.load", "ups.runtime"];
+const CLES = ["srv1.cpu.percent", "srv1.cpu.status", "srv1.disk.used", "srv1.disk.total", "ups.battery.charge", "ups.load", "ups.runtime", "esp32.temp", "esp32.hum"];
 
-let donnees = { cpu: [], sante: [], disque: [], disqueTotal: [], batterie: [], chargeSortie: [], autonomie: [], heures: [] };
+let donnees = { cpu: [], sante: [], disque: [], disqueTotal: [], batterie: [], chargeSortie: [], autonomie: [], temp: [], hum: [], heures: [] };
 let graphiques = {};
 
 // Communication avec Zabbix
@@ -102,6 +102,8 @@ async function actualiser(premierMode) {
         donnees.batterie = await recupererHistorique("ups.battery.charge", 1);
         donnees.chargeSortie = await recupererHistorique("ups.load", 1);
         donnees.autonomie = await recupererHistorique("ups.runtime", 60);
+        donnees.temp = await recupererHistorique("esp32.temp", 1);
+        donnees.hum = await recupererHistorique("esp32.hum", 1);
 
         graphiques.cpu.data.datasets[0].data = donnees.cpu;
         graphiques.disque.data.datasets[0].data = donnees.disqueTotal;
@@ -126,6 +128,8 @@ async function actualiser(premierMode) {
         ajouter(donnees.batterie, Math.round(lire("ups.battery.charge")));
         ajouter(donnees.chargeSortie, Math.round(lire("ups.load")));
         ajouter(donnees.autonomie, Math.round(lire("ups.runtime") / 60));
+        ajouter(donnees.temp, lire("esp32.temp"));
+        ajouter(donnees.hum, lire("esp32.hum"));
     }
 
     // Afichage du texte html
@@ -143,6 +147,9 @@ async function actualiser(premierMode) {
     document.getElementById("valOnduleurBatterie").innerText = donnees.batterie[fin] + "%";
     document.getElementById("valOnduleurSortie").innerText = donnees.chargeSortie[fin] + "%";
     document.getElementById("valOnduleurAutonomie").innerText = donnees.autonomie[fin] + " min";
+
+    document.getElementById("valEsp32Temp").innerText = donnees.temp[fin].toFixed(1) + "°C";
+    document.getElementById("valEsp32Hum").innerText = donnees.hum[fin].toFixed(1) + "%";
 
     document.getElementById("logSyncTime").innerText = new Date().toLocaleTimeString('fr-FR');
     if (donnees.sante[fin] === 100) {
