@@ -1,8 +1,8 @@
 const API = "a0a6a576d587407464f8dd1a481992540b8007c59189b6f194c988bedbdda17e";
 const MAX_POINTS = 61;
-const CLES = ["srv1.cpu.percent", "srv1.cpu.status", "srv1.disk.used", "srv1.disk.total", "ups.battery.charge", "ups.load", "ups.runtime", "esp32.temp", "esp32.hum"];
+const CLES = ["srv1.cpu.percent", "srv1.cpu.status", "srv1.backup.status", "srv1.disk.used", "srv1.disk.total", "ups.battery.charge", "ups.load", "ups.runtime", "esp32.temp", "esp32.hum"];
 
-let donnees = { cpu: [], sante: [], disque: [], disqueTotal: [], batterie: [], chargeSortie: [], autonomie: [], temp: [], hum: [], heures: [] };
+let donnees = { cpu: [], sante: [], disque: [], sauvegarde: [], disqueTotal: [], batterie: [], chargeSortie: [], autonomie: [], temp: [], hum: [], heures: [] };
 let graphiques = {};
 
 // Communication avec Zabbix
@@ -96,6 +96,11 @@ async function actualiser(premierMode) {
             else donnees.sante.push(0);
         }
 
+        // historique Sauvegarde
+
+        // --- ON AJOUTE LA SAUVEGARDE ICI (Le correctif) ---
+        donnees.sauvegarde = await recupererHistorique("srv1.backup.status", 1);
+
         let octetsTo = 1099511627776; // 1 To
         donnees.disque = await recupererHistorique("srv1.disk.used", octetsTo);
         donnees.disqueTotal = await recupererHistorique("srv1.disk.total", octetsTo);
@@ -118,9 +123,14 @@ async function actualiser(premierMode) {
         ajouter(donnees.heures, new Date().toLocaleTimeString('fr-FR'));
         ajouter(donnees.cpu, Math.round(lire("srv1.cpu.percent")));
 
+        // ETAT CPU
         let santeValeur = lire("srv1.cpu.status");
         if (santeValeur === 2) ajouter(donnees.sante, 100);
         else ajouter(donnees.sante, 0);
+
+        // ETAT SAUVEGARDE
+        let backupValeur = lire("srv1.backup.status");
+        ajouter(donnees.sauvegarde, backupValeur);
 
         let octetsTo = 1099511627776;
         ajouter(donnees.disque, lire("srv1.disk.used") / octetsTo);
@@ -152,7 +162,10 @@ async function actualiser(premierMode) {
     document.getElementById("valEsp32Hum").innerText = donnees.hum[fin].toFixed(1) + "%";
 
     document.getElementById("logSyncTime").innerText = new Date().toLocaleTimeString('fr-FR');
-    if (donnees.sante[fin] === 100) {
+
+
+    // On regarde la boîte sauvegarde (0 = SUCCÈS)
+    if (donnees.sauvegarde[fin] === 0) {
         document.getElementById("logSyncStatus").innerText = "SUCCÈS";
         document.getElementById("logSyncStatus").className = "couleur-vert";
     } else {
@@ -179,3 +192,4 @@ async function lancement() {
 }
 
 lancement();
+
