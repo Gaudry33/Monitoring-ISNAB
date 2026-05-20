@@ -2,7 +2,7 @@
   <img src="Isnab.gif" width="700">
 </p>
 
-## Supervision Centralisée de l'Infrastructure Réseau
+## Supervision Centralisée de l'ISNAB 
 Ce projet consiste à concevoir et déployer un système de supervision et de surveillance en temps réel du SRV1, d'un onduleur et des données environnementales d'une salle informatique. Les données sont collectées à l'ISNAB (Villenave d'Ornon) et centralisées dans les bureaux d'Absyde (Floirac) via une architecture sécurisée incluant le protocole Zabbix.
 
 ## Contexte du projet
